@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>혜민의 블로그</title>
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header, .footer {
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 1rem;
+        }
+        .navbar {
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem;
+            background-color: #e9ecef;
+        }
+        .navbar a {
+            margin: 0 1rem;
+            text-decoration: none;
+            color: #212529;
+        }
+        .featured {
+            padding: 2rem;
+            text-align: center;
+            background-color: #e2e3e5;
+        }
+        .posts {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 2rem;
+        }
+        .post {
+            flex: 1 0 45%;
+            margin: 1rem;
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            background-color: #ffffff;
+        }
+        .post img {
+            width: 100%;
+            height: auto;
+        }
+        .footer a {
+            color: #212529;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>혜민의 블로그</h1>
+    </header>
+    <nav class="navbar">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+    <section class="featured">
+        <h2>Featured Post</h2>
+        <p>A short description of the featured post.</p>
+    </section>
+    <section class="posts">
+        <div class="post">
+            <h3>Post Title 1</h3>
+            <img src="https://via.placeholder.com/200" alt="Placeholder">
+            <p>A brief summary of the post content.</p>
+            <a href="#">Read More</a>
+        </div>
+        <div class="post">
+            <h3>Post Title 2</h3>
+            <img src="https://via.placeholder.com/200" alt="Placeholder">
+            <p>A brief summary of the post content.</p>
+            <a href="#">Read More</a>
+        </div>
+    </section>
+    <footer class="footer">
+        <p>© 2024 My Blog</p>
+        <p><a href="#top">Back to top</a></p>
+    </footer>
+    <script>
+        console.log('Blog page loaded successfully!');
+    </script>
+</body>
+</html>
