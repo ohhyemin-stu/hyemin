@@ -1,126 +1,156 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>타자기 만들기</title>
+  <meta charset="UTF-8" />
+  <title>타자기</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #f0f0f0;
       text-align: center;
-      margin: 20px;
+      padding: 20px;
     }
+
     .info {
-      margin-bottom: 20px;
       font-weight: bold;
+      margin-bottom: 20px;
     }
+
     .paper {
       display: block;
-      width: 80%;
-      height: 200px;
-      margin: 20px auto;
+      width: 600px;
+      height: 150px;
+      border: 2px solid #333;
+      background: #fff;
+      margin: 0 auto 20px auto;
       padding: 10px;
-      border: 2px solid black;
-      background-color: #f9f9f9;
       text-align: left;
       white-space: pre-wrap;
+      overflow-y: auto;
       font-size: 18px;
     }
+
     .keyboard {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
+      display: inline-block;
     }
+
     .row {
+      margin: 5px 0;
       display: flex;
-      gap: 5px;
+      justify-content: center;
     }
-    .group1 button { background-color: #ffcccc; }
-    .group2 button { background-color: #ccffcc; }
-    .group3 button { background-color: #ccccff; }
-    .group4 button { background-color: #ffffcc; }
-    button {
-      padding: 10px;
-      font-size: 16px;
+
+    .key {
+      width: 40px;
+      height: 40px;
+      margin: 2px;
       border: 1px solid #333;
-      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       border-radius: 5px;
-      min-width: 40px;
+      background-color: #ccc;
+      user-select: none;
     }
-    button:hover {
-      opacity: 0.8;
+
+    .group1 { background-color: #f99; } /* 숫자 */
+    .group2 { background-color: #9f9; } /* QWERTY */
+    .group3 { background-color: #99f; } /* ASDF */
+    .group4 { background-color: #ff9; } /* ZXCV */
+
+    .key.pressed {
+      background-color: #444 !important;
+      color: white;
     }
   </style>
 </head>
 <body>
 
   <div class="info">
-    제작자: 오혜민 | 학번: 2402182 | 소속: 한양 빅 데이터
+    제작자: 오혜민<br>
+    학번: 2402182<br>
+    소속: 한양여자대학교 빅데이터학과
   </div>
 
   <label class="paper" id="display"></label>
 
   <div class="keyboard">
-    <div class="row group1">
-      <button onclick="typeKey('1')">1</button>
-      <button onclick="typeKey('2')">2</button>
-      <button onclick="typeKey('3')">3</button>
-      <button onclick="typeKey('4')">4</button>
-      <button onclick="typeKey('5')">5</button>
-      <button onclick="typeKey('6')">6</button>
-      <button onclick="typeKey('7')">7</button>
-      <button onclick="typeKey('8')">8</button>
-      <button onclick="typeKey('9')">9</button>
-      <button onclick="typeKey('0')">0</button>
+    <div class="row">
+      <div class="key group1">1</div>
+      <div class="key group1">2</div>
+      <div class="key group1">3</div>
+      <div class="key group1">4</div>
+      <div class="key group1">5</div>
+      <div class="key group1">6</div>
+      <div class="key group1">7</div>
+      <div class="key group1">8</div>
+      <div class="key group1">9</div>
+      <div class="key group1">0</div>
     </div>
-    <div class="row group2">
-      <button onclick="typeKey('q')">q</button>
-      <button onclick="typeKey('e')">e</button>
-      <button onclick="typeKey('w')">w</button>
-      <button onclick="typeKey('r')">r</button>
-      <button onclick="typeKey('t')">t</button>
-      <button onclick="typeKey('y')">y</button>
-      <button onclick="typeKey('u')">u</button>
-      <button onclick="typeKey('i')">i</button>
-      <button onclick="typeKey('o')">o</button>
-      <button onclick="typeKey('p')">p</button>
+    <div class="row">
+      <div class="key group2">q</div>
+      <div class="key group2">e</div>
+      <div class="key group2">w</div>
+      <div class="key group2">r</div>
+      <div class="key group2">t</div>
+      <div class="key group2">y</div>
+      <div class="key group2">u</div>
+      <div class="key group2">i</div>
+      <div class="key group2">o</div>
+      <div class="key group2">p</div>
     </div>
-    <div class="row group3">
-      <button onclick="typeKey('a')">a</button>
-      <button onclick="typeKey('s')">s</button>
-      <button onclick="typeKey('d')">d</button>
-      <button onclick="typeKey('f')">f</button>
-      <button onclick="typeKey('g')">g</button>
-      <button onclick="typeKey('h')">h</button>
-      <button onclick="typeKey('j')">j</button>
-      <button onclick="typeKey('k')">k</button>
-      <button onclick="typeKey('l')">l</button>
-      <button onclick="typeKey(';')">;</button>
+    <div class="row">
+      <div class="key group3">a</div>
+      <div class="key group3">s</div>
+      <div class="key group3">d</div>
+      <div class="key group3">f</div>
+      <div class="key group3">g</div>
+      <div class="key group3">h</div>
+      <div class="key group3">j</div>
+      <div class="key group3">k</div>
+      <div class="key group3">l</div>
+      <div class="key group3">;</div>
     </div>
-    <div class="row group4">
-      <button onclick="typeKey('z')">z</button>
-      <button onclick="typeKey('x')">x</button>
-      <button onclick="typeKey('c')">c</button>
-      <button onclick="typeKey('v')">v</button>
-      <button onclick="typeKey('b')">b</button>
-      <button onclick="typeKey('n')">n</button>
-      <button onclick="typeKey('m')">m</button>
-      <button onclick="typeKey(',')">,</button>
-      <button onclick="typeKey('.')">.</button>
-      <button onclick="typeKey('/')">/</button>
+    <div class="row">
+      <div class="key group4">z</div>
+      <div class="key group4">x</div>
+      <div class="key group4">c</div>
+      <div class="key group4">v</div>
+      <div class="key group4">b</div>
+      <div class="key group4">n</div>
+      <div class="key group4">m</div>
+      <div class="key group4">,</div>
+      <div class="key group4">.</div>
+      <div class="key group4">/</div>
     </div>
   </div>
 
   <script>
-    let content = "";
+    const display = document.getElementById("display");
+    const keys = document.querySelectorAll(".key");
 
-    function typeKey(character) {
-      content += character;
-      document.getElementById('display').textContent = content;
-    }
+    document.addEventListener("keydown", (e) => {
+      const char = e.key.toLowerCase();
+      if (char.length === 1 && /[a-z0-9;,.\/]/.test(char)) {
+        display.textContent += char;
+      }
+
+      keys.forEach((key) => {
+        if (key.textContent === char) {
+          key.classList.add("pressed");
+        }
+      });
+    });
+
+    document.addEventListener("keyup", (e) => {
+      const char = e.key.toLowerCase();
+      keys.forEach((key) => {
+        if (key.textContent === char) {
+          key.classList.remove("pressed");
+        }
+      });
+    });
   </script>
 
 </body>
 </html>
-
-
