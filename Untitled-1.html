@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>타자기 만들기</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    .info {
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+    .paper {
+      display: block;
+      width: 80%;
+      height: 200px;
+      margin: 20px auto;
+      padding: 10px;
+      border: 2px solid black;
+      background-color: #f9f9f9;
+      text-align: left;
+      white-space: pre-wrap;
+      font-size: 18px;
+    }
+    .keyboard {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .row {
+      display: flex;
+      gap: 5px;
+    }
+    .group1 button { background-color: #ffcccc; }
+    .group2 button { background-color: #ccffcc; }
+    .group3 button { background-color: #ccccff; }
+    .group4 button { background-color: #ffffcc; }
+    button {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #333;
+      cursor: pointer;
+      border-radius: 5px;
+      min-width: 40px;
+    }
+    button:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="info">
+    제작자: 오혜민 | 학번: 2402182 | 소속: 한양 빅 데이터
+  </div>
+
+  <label class="paper" id="display"></label>
+
+  <div class="keyboard">
+    <div class="row group1">
+      <button onclick="typeKey('1')">1</button>
+      <button onclick="typeKey('2')">2</button>
+      <button onclick="typeKey('3')">3</button>
+      <button onclick="typeKey('4')">4</button>
+      <button onclick="typeKey('5')">5</button>
+      <button onclick="typeKey('6')">6</button>
+      <button onclick="typeKey('7')">7</button>
+      <button onclick="typeKey('8')">8</button>
+      <button onclick="typeKey('9')">9</button>
+      <button onclick="typeKey('0')">0</button>
+    </div>
+    <div class="row group2">
+      <button onclick="typeKey('q')">q</button>
+      <button onclick="typeKey('e')">e</button>
+      <button onclick="typeKey('w')">w</button>
+      <button onclick="typeKey('r')">r</button>
+      <button onclick="typeKey('t')">t</button>
+      <button onclick="typeKey('y')">y</button>
+      <button onclick="typeKey('u')">u</button>
+      <button onclick="typeKey('i')">i</button>
+      <button onclick="typeKey('o')">o</button>
+      <button onclick="typeKey('p')">p</button>
+    </div>
+    <div class="row group3">
+      <button onclick="typeKey('a')">a</button>
+      <button onclick="typeKey('s')">s</button>
+      <button onclick="typeKey('d')">d</button>
+      <button onclick="typeKey('f')">f</button>
+      <button onclick="typeKey('g')">g</button>
+      <button onclick="typeKey('h')">h</button>
+      <button onclick="typeKey('j')">j</button>
+      <button onclick="typeKey('k')">k</button>
+      <button onclick="typeKey('l')">l</button>
+      <button onclick="typeKey(';')">;</button>
+    </div>
+    <div class="row group4">
+      <button onclick="typeKey('z')">z</button>
+      <button onclick="typeKey('x')">x</button>
+      <button onclick="typeKey('c')">c</button>
+      <button onclick="typeKey('v')">v</button>
+      <button onclick="typeKey('b')">b</button>
+      <button onclick="typeKey('n')">n</button>
+      <button onclick="typeKey('m')">m</button>
+      <button onclick="typeKey(',')">,</button>
+      <button onclick="typeKey('.')">.</button>
+      <button onclick="typeKey('/')">/</button>
+    </div>
+  </div>
+
+  <script>
+    let content = "";
+
+    function typeKey(character) {
+      content += character;
+      document.getElementById('display').textContent = content;
+    }
+  </script>
+
+</body>
+</html>
+
+
