@@ -1,156 +1,95 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <title>타자기</title>
-  <style>
-    body {
-      font-family: 'Courier New', Courier, monospace;
-      background-color: #f0f0f0;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .info {
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    .paper {
-      display: block;
-      width: 600px;
-      height: 150px;
-      border: 2px solid #333;
-      background: #fff;
-      margin: 0 auto 20px auto;
-      padding: 10px;
-      text-align: left;
-      white-space: pre-wrap;
-      overflow-y: auto;
-      font-size: 18px;
-    }
-
-    .keyboard {
-      display: inline-block;
-    }
-
-    .row {
-      margin: 5px 0;
-      display: flex;
-      justify-content: center;
-    }
-
-    .key {
-      width: 40px;
-      height: 40px;
-      margin: 2px;
-      border: 1px solid #333;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 5px;
-      background-color: #ccc;
-      user-select: none;
-    }
-
-    .group1 { background-color: #f99; } /* 숫자 */
-    .group2 { background-color: #9f9; } /* QWERTY */
-    .group3 { background-color: #99f; } /* ASDF */
-    .group4 { background-color: #ff9; } /* ZXCV */
-
-    .key.pressed {
-      background-color: #444 !important;
-      color: white;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>한글 타자기</title>
+<style>
+  body { font-family: sans-serif; text-align: center; }
+  label { display: block; border: 1px solid #000; padding: 10px; height: 40px; margin: 20px auto; width: 80%; overflow-wrap: break-word; }
+  .key { display: inline-block; padding: 10px; margin: 2px; border: 1px solid #000; width: 30px; }
+  .group1 { background: #ffb3ba; }
+  .group2 { background: #baffc9; }
+  .group3 { background: #bae1ff; }
+  .group4 { background: #ffffba; }
+  .flash { background: yellow !important; }
+</style>
 </head>
 <body>
+<h3>오** | 2***** | 한양 빅데이터</h3>
+<button onclick="toggleLang()">한/영</button> <span id="lang">현재: 영어</span>
+<div id="keys"></div>
+<label id="display"></label>
+<script>
+let lang = 'en';
+let en = [['1','2','3','4','5','6','7','8','9','0'],['q','w','e','r','t','y','u','i','o','p'],['a','s','d','f','g','h','j','k','l'],['z','x','c','v','b','n','m',',','.']];
+let koMap = {
+  'q': 'ㅂ', 'w': 'ㅈ', 'e': 'ㄷ', 'r': 'ㄱ', 't': 'ㅅ', 'y': 'ㅛ', 'u': 'ㅕ', 'i': 'ㅑ', 'o': 'ㅐ', 'p': 'ㅔ',
+  'a': 'ㅁ', 's': 'ㄴ', 'd': 'ㅇ', 'f': 'ㄹ', 'g': 'ㅎ', 'h': 'ㅗ', 'j': 'ㅓ', 'k': 'ㅏ', 'l': 'ㅣ',
+  'z': 'ㅋ', 'x': 'ㅌ', 'c': 'ㅊ', 'v': 'ㅍ', 'b': 'ㅠ', 'n': 'ㅜ', 'm': 'ㅡ', ',': ',', '.': '.'
+};
+let keys = document.getElementById('keys');
+let display = document.getElementById('display');
+let langText = document.getElementById('lang');
 
-  <div class="info">
-    제작자: 오혜민<br>
-    학번: 2402182<br>
-    소속: 한양여자대학교 빅데이터학과
-  </div>
+function draw() {
+  keys.innerHTML = '';
+  let currentLayout = (lang === 'en') ? en : [
+    ['ㅂ','ㅈ','ㄷ','ㄱ','ㅅ','ㅛ','ㅕ','ㅑ','ㅐ','ㅔ'],
+    ['ㅁ','ㄴ','ㅇ','ㄹ','ㅎ','ㅗ','ㅓ','ㅏ','ㅣ'],
+    ['ㅋ','ㅌ','ㅊ','ㅍ','ㅠ','ㅜ','ㅡ'],
+    ['.']
+  ];
+  currentLayout.forEach((row, i) => {
+    row.forEach(k => {
+      let b = document.createElement('div');
+      b.className = 'key group' + (i + 1);
+      b.textContent = k;
+      keys.appendChild(b);
+    });
+    keys.appendChild(document.createElement('br'));
+  });
+}
 
-  <label class="paper" id="display"></label>
+function toggleLang() {
+  lang = lang === 'en' ? 'ko' : 'en';
+  langText.textContent = '현재: ' + (lang === 'en' ? '영어' : '한글');
+  draw();
+}
 
-  <div class="keyboard">
-    <div class="row">
-      <div class="key group1">1</div>
-      <div class="key group1">2</div>
-      <div class="key group1">3</div>
-      <div class="key group1">4</div>
-      <div class="key group1">5</div>
-      <div class="key group1">6</div>
-      <div class="key group1">7</div>
-      <div class="key group1">8</div>
-      <div class="key group1">9</div>
-      <div class="key group1">0</div>
-    </div>
-    <div class="row">
-      <div class="key group2">q</div>
-      <div class="key group2">e</div>
-      <div class="key group2">w</div>
-      <div class="key group2">r</div>
-      <div class="key group2">t</div>
-      <div class="key group2">y</div>
-      <div class="key group2">u</div>
-      <div class="key group2">i</div>
-      <div class="key group2">o</div>
-      <div class="key group2">p</div>
-    </div>
-    <div class="row">
-      <div class="key group3">a</div>
-      <div class="key group3">s</div>
-      <div class="key group3">d</div>
-      <div class="key group3">f</div>
-      <div class="key group3">g</div>
-      <div class="key group3">h</div>
-      <div class="key group3">j</div>
-      <div class="key group3">k</div>
-      <div class="key group3">l</div>
-      <div class="key group3">;</div>
-    </div>
-    <div class="row">
-      <div class="key group4">z</div>
-      <div class="key group4">x</div>
-      <div class="key group4">c</div>
-      <div class="key group4">v</div>
-      <div class="key group4">b</div>
-      <div class="key group4">n</div>
-      <div class="key group4">m</div>
-      <div class="key group4">,</div>
-      <div class="key group4">.</div>
-      <div class="key group4">/</div>
-    </div>
-  </div>
+document.addEventListener('keydown', e => {
+  let k = e.key.toLowerCase();
 
-  <script>
-    const display = document.getElementById("display");
-    const keys = document.querySelectorAll(".key");
+  if (k === 'backspace') {
+    display.textContent = display.textContent.slice(0, -1);
+    return;
+  }
+  if (k === '.') {
+    toggleLang();
+    return;
+  }
 
-    document.addEventListener("keydown", (e) => {
-      const char = e.key.toLowerCase();
-      if (char.length === 1 && /[a-z0-9;,.\/]/.test(char)) {
-        display.textContent += char;
+  let charToShow = '';
+
+  if (lang === 'en') {
+    en.flat().forEach(key => {
+      if (key === k) charToShow = key;
+    });
+  } else {
+    if (koMap[k]) charToShow = koMap[k];
+  }
+
+  if (charToShow) {
+    display.textContent += charToShow;
+    [...document.getElementsByClassName('key')].forEach(el => {
+      if (el.textContent === charToShow) {
+        el.classList.add('flash');
+        setTimeout(() => el.classList.remove('flash'), 200);
       }
-
-      keys.forEach((key) => {
-        if (key.textContent === char) {
-          key.classList.add("pressed");
-        }
-      });
     });
+  }
+});
 
-    document.addEventListener("keyup", (e) => {
-      const char = e.key.toLowerCase();
-      keys.forEach((key) => {
-        if (key.textContent === char) {
-          key.classList.remove("pressed");
-        }
-      });
-    });
-  </script>
-
+draw();
+</script>
 </body>
 </html>
