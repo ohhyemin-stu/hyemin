@@ -1,95 +1,349 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>한글 타자기</title>
-<style>
-  body { font-family: sans-serif; text-align: center; }
-  label { display: block; border: 1px solid #000; padding: 10px; height: 40px; margin: 20px auto; width: 80%; overflow-wrap: break-word; }
-  .key { display: inline-block; padding: 10px; margin: 2px; border: 1px solid #000; width: 30px; }
-  .group1 { background: #ffb3ba; }
-  .group2 { background: #baffc9; }
-  .group3 { background: #bae1ff; }
-  .group4 { background: #ffffba; }
-  .flash { background: yellow !important; }
-</style>
+  <meta charset="UTF-8" />
+  <title>홈페이지 과제</title>
+  <style>
+    body { font-family: sans-serif; margin: 0; padding: 0; }
+    nav { background-color: #333; padding: 10px; }
+    nav a { color: white; margin: 0 15px; text-decoration: none; cursor: pointer; }
+    footer { background-color: #222; color: white; padding: 20px; text-align: center; }
+    main, section { padding: 20px; }
+    .section { display: none; }
+    .keyboard {
+      width: 560px;
+      margin: 10px auto 20px auto;
+      user-select: none;
+    }
+    .row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 5px;
+    }
+    .key {
+      width: 40px;
+      height: 40px;
+      margin: 2px;
+      background-color: #ddd;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 40px;
+      font-weight: bold;
+      color: black;
+    }
+    .key.red { background-color: #f8c8c8; }
+    .key.green { background-color: #c8f8c8; }
+    .key.blue { background-color: #c8d8f8; }
+    .key.yellow { background-color: #f8f0c8; }
+    .calculator {
+      width: 230px;
+      margin: 20px auto;
+      text-align: center;
+    }
+    .calculator input {
+      width: 210px;
+      height: 40px;
+      font-size: 20px;
+      margin-bottom: 10px;
+      text-align: right;
+      padding-right: 10px;
+      box-sizing: border-box;
+    }
+    .calculator .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 50px);
+      grid-gap: 5px;
+      justify-content: center;
+    }
+    .calculator .buttons button {
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      border: 1px solid #999;
+      background-color: #eee;
+      transition: background-color 0.2s;
+    }
+    .calculator .buttons button.operator {
+      background-color: #f4a261;
+      color: white;
+      font-weight: bold;
+    }
+    .calculator .buttons button:hover {
+      background-color: #ddd;
+    }
+    textarea {
+      width: 90%;
+      height: 150px;
+      font-size: 18px;
+      display: block;
+      margin: 0 auto 20px auto;
+      resize: vertical;
+      padding: 8px;
+    }
+    #phone .display {
+      width: 170px;
+      height: 40px;
+      margin: 0 auto 10px auto;
+      padding: 8px;
+      border: 1px solid #999;
+      border-radius: 5px;
+      font-size: 18px;
+      text-align: center;
+      user-select: none;
+      background-color: #f9f9f9;
+    }
+    #phone .buttons {
+      width: 170px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 50px);
+      grid-gap: 5px;
+      justify-content: center;
+    }
+    #phone .buttons button {
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      border: 1px solid #999;
+      background-color: #eee;
+      transition: background-color 0.2s;
+    }
+    #phone .buttons button:hover {
+      background-color: #ddd;
+    }
+    #phone .control-buttons {
+      margin-top: 10px;
+      text-align: center;
+    }
+    #phone .control-buttons button {
+      width: 80px;
+      height: 40px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+      border: 1px solid #999;
+      background-color: #f4a261;
+      color: white;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+    #phone .control-buttons button:hover {
+      background-color: #e07b3f;
+    }
+  </style>
 </head>
 <body>
-<h3>오** | 2***** | 한양 빅데이터</h3>
-<button onclick="toggleLang()">한/영</button> <span id="lang">현재: 영어</span>
-<div id="keys"></div>
-<label id="display"></label>
+  <nav>
+    <a onclick="showSection('home')">홈</a>
+    <a onclick="showSection('eng')">영문 타자기</a>
+    <a onclick="showSection('kor')">한글 타자기</a>
+    <a onclick="showSection('calc')">계산기</a>
+    <a onclick="showSection('phone')">전화기</a>
+  </nav>
+  <main id="home" class="section" style="display: block;">
+    <h1>초기페이지 / 사이트맵</h1>
+    <ul>
+      <li><a onclick="showSection('eng')">영문 타자기</a></li>
+      <li><a onclick="showSection('kor')">한글 타자기</a></li>
+      <li><a onclick="showSection('calc')">계산기</a></li>
+      <li><a onclick="showSection('phone')">전화기</a></li>
+    </ul>
+  </main>
+  <section id="eng" class="section">
+    <h2>영문 타자기</h2>
+    <div class="keyboard" aria-label="영문 자판">
+      <div class="row">
+        <div class="key red">1</div>
+        <div class="key red">2</div>
+        <div class="key red">3</div>
+        <div class="key red">4</div>
+        <div class="key red">5</div>
+        <div class="key red">6</div>
+        <div class="key red">7</div>
+        <div class="key red">8</div>
+        <div class="key red">9</div>
+        <div class="key red">0</div>
+      </div>
+      <div class="row">
+        <div class="key green">q</div>
+        <div class="key green">w</div>
+        <div class="key green">e</div>
+        <div class="key green">r</div>
+        <div class="key green">t</div>
+        <div class="key green">y</div>
+        <div class="key green">u</div>
+        <div class="key green">i</div>
+        <div class="key green">o</div>
+        <div class="key green">p</div>
+      </div>
+      <div class="row">
+        <div class="key blue">a</div>
+        <div class="key blue">s</div>
+        <div class="key blue">d</div>
+        <div class="key blue">f</div>
+        <div class="key blue">g</div>
+        <div class="key blue">h</div>
+        <div class="key blue">j</div>
+        <div class="key blue">k</div>
+        <div class="key blue">l</div>
+      </div>
+      <div class="row">
+        <div class="key yellow">z</div>
+        <div class="key yellow">x</div>
+        <div class="key yellow">c</div>
+        <div class="key yellow">v</div>
+        <div class="key yellow">b</div>
+        <div class="key yellow">n</div>
+        <div class="key yellow">m</div>
+        <div class="key yellow">,</div>
+        <div class="key yellow">.</div>
+      </div>
+    </div>
+    <textarea id="engText" placeholder="Type in English..."></textarea>
+  </section>
+  <section id="kor" class="section">
+    <h2>한글 타자기</h2>
+    <div class="keyboard" aria-label="한글 자판">
+      <div class="row">
+        <div class="key red">ㅂ</div>
+        <div class="key red">ㅈ</div>
+        <div class="key red">ㄷ</div>
+        <div class="key red">ㄱ</div>
+        <div class="key red">ㅅ</div>
+        <div class="key red">ㅆ</div>
+        <div class="key red">ㅛ</div>
+        <div class="key red">ㅕ</div>
+        <div class="key red">ㅑ</div>
+        <div class="key red">ㅐ</div>
+        <div class="key red">ㅔ</div>
+      </div>
+      <div class="row">
+        <div class="key green">ㅁ</div>
+        <div class="key green">ㄴ</div>
+        <div class="key green">ㅇ</div>
+        <div class="key green">ㄹ</div>
+        <div class="key green">ㅎ</div>
+        <div class="key green">ㅗ</div>
+        <div class="key green">ㅓ</div>
+        <div class="key green">ㅏ</div>
+        <div class="key green">ㅣ</div>
+      </div>
+      <div class="row">
+        <div class="key blue">ㅋ</div>
+        <div class="key blue">ㅌ</div>
+        <div class="key blue">ㅊ</div>
+        <div class="key blue">ㅍ</div>
+        <div class="key blue">ㅠ</div>
+        <div class="key blue">ㅜ</div>
+        <div class="key blue">ㅡ</div>
+      </div>
+      <div class="row">
+        <div class="key yellow">.</div>
+      </div>
+    </div>
+    <textarea id="korText" placeholder="한글을 입력하세요..."></textarea>
+  </section>
+  <section id="calc" class="section">
+    <h2>계산기</h2>
+    <div class="calculator">
+      <input type="text" id="display" disabled />
+      <div class="buttons">
+        <button onclick="append('7')">7</button>
+        <button onclick="append('8')">8</button>
+        <button onclick="append('9')">9</button>
+        <button onclick="append('/')" class="operator">/</button>
+        <button onclick="append('4')">4</button>
+        <button onclick="append('5')">5</button>
+        <button onclick="append('6')">6</button>
+        <button onclick="append('*')" class="operator">*</button>
+        <button onclick="append('1')">1</button>
+        <button onclick="append('2')">2</button>
+        <button onclick="append('3')">3</button>
+        <button onclick="append('-')" class="operator">-</button>
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="append('0')">0</button>
+        <button onclick="calculate()">=</button>
+        <button onclick="append('+')" class="operator">+</button>
+      </div>
+    </div>
+  </section>
+  <section id="phone" class="section">
+    <h2>전화기</h2>
+    <div class="display" id="phoneDisplay"></div>
+    <div class="buttons">
+      <button onclick="press('1')">1</button>
+      <button onclick="press('2')">2</button>
+      <button onclick="press('3')">3</button>
+      <button onclick="press('4')">4</button>
+      <button onclick="press('5')">5</button>
+      <button onclick="press('6')">6</button>
+      <button onclick="press('7')">7</button>
+      <button onclick="press('8')">8</button>
+      <button onclick="press('9')">9</button>
+      <button onclick="press('*')">*</button>
+      <button onclick="press('0')">0</button>
+      <button onclick="press('#')">#</button>
+    </div>
+    <div class="control-buttons">
+      <button onclick="clearPhone()">C</button>
+      <button onclick="call()">통화</button>
+    </div>
+  </section>
+  <footer>
+    소속: 한양여자대학교<br>
+    학번: 2402182<br>
+    이름: 오혜민
+  </footer>
 <script>
-let lang = 'en';
-let en = [['1','2','3','4','5','6','7','8','9','0'],['q','w','e','r','t','y','u','i','o','p'],['a','s','d','f','g','h','j','k','l'],['z','x','c','v','b','n','m',',','.']];
-let koMap = {
-  'q': 'ㅂ', 'w': 'ㅈ', 'e': 'ㄷ', 'r': 'ㄱ', 't': 'ㅅ', 'y': 'ㅛ', 'u': 'ㅕ', 'i': 'ㅑ', 'o': 'ㅐ', 'p': 'ㅔ',
-  'a': 'ㅁ', 's': 'ㄴ', 'd': 'ㅇ', 'f': 'ㄹ', 'g': 'ㅎ', 'h': 'ㅗ', 'j': 'ㅓ', 'k': 'ㅏ', 'l': 'ㅣ',
-  'z': 'ㅋ', 'x': 'ㅌ', 'c': 'ㅊ', 'v': 'ㅍ', 'b': 'ㅠ', 'n': 'ㅜ', 'm': 'ㅡ', ',': ',', '.': '.'
-};
-let keys = document.getElementById('keys');
-let display = document.getElementById('display');
-let langText = document.getElementById('lang');
-
-function draw() {
-  keys.innerHTML = '';
-  let currentLayout = (lang === 'en') ? en : [
-    ['ㅂ','ㅈ','ㄷ','ㄱ','ㅅ','ㅛ','ㅕ','ㅑ','ㅐ','ㅔ'],
-    ['ㅁ','ㄴ','ㅇ','ㄹ','ㅎ','ㅗ','ㅓ','ㅏ','ㅣ'],
-    ['ㅋ','ㅌ','ㅊ','ㅍ','ㅠ','ㅜ','ㅡ'],
-    ['.']
-  ];
-  currentLayout.forEach((row, i) => {
-    row.forEach(k => {
-      let b = document.createElement('div');
-      b.className = 'key group' + (i + 1);
-      b.textContent = k;
-      keys.appendChild(b);
+  function showSection(id) {
+    document.querySelectorAll('.section').forEach(section => {
+      section.style.display = 'none';
     });
-    keys.appendChild(document.createElement('br'));
-  });
-}
-
-function toggleLang() {
-  lang = lang === 'en' ? 'ko' : 'en';
-  langText.textContent = '현재: ' + (lang === 'en' ? '영어' : '한글');
-  draw();
-}
-
-document.addEventListener('keydown', e => {
-  let k = e.key.toLowerCase();
-
-  if (k === 'backspace') {
-    display.textContent = display.textContent.slice(0, -1);
-    return;
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'block';
   }
-  if (k === '.') {
-    toggleLang();
-    return;
+  const display = document.getElementById('display');
+  function append(char) {
+    display.value += char;
   }
-
-  let charToShow = '';
-
-  if (lang === 'en') {
-    en.flat().forEach(key => {
-      if (key === k) charToShow = key;
-    });
-  } else {
-    if (koMap[k]) charToShow = koMap[k];
+  function clearDisplay() {
+    display.value = '';
   }
-
-  if (charToShow) {
-    display.textContent += charToShow;
-    [...document.getElementsByClassName('key')].forEach(el => {
-      if (el.textContent === charToShow) {
-        el.classList.add('flash');
-        setTimeout(() => el.classList.remove('flash'), 200);
-      }
-    });
+  function calculate() {
+    try {
+      display.value = eval(display.value) || '';
+    } catch {
+      alert('잘못된 수식입니다.');
+      clearDisplay();
+    }
   }
-});
-
-draw();
+  let rawNumber = '';
+  function formatPhone(number) {
+    const digits = number.replace(/[^\d]/g, '');
+    if (digits.length < 4) return digits;
+    if (digits.length < 8) return digits.slice(0,3) + '-' + digits.slice(3);
+    return digits.slice(0,3) + '-' + digits.slice(3,7) + '-' + digits.slice(7,11);
+  }
+  function press(num) {
+    if (rawNumber.length >= 11) return;
+    rawNumber += num;
+    document.getElementById('phoneDisplay').innerText = formatPhone(rawNumber);
+  }
+  function clearPhone() {
+    rawNumber = '';
+    document.getElementById('phoneDisplay').innerText = '';
+  }
+  function call() {
+    if (!rawNumber) {
+      alert('전화번호를 입력하세요.');
+      return;
+    }
+    alert('전화 걸기: ' + rawNumber);
+  }
 </script>
 </body>
 </html>
